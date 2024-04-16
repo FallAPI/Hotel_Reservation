@@ -37,10 +37,11 @@ class RoomReservation extends Reservation {
                 "Choose",
                 JOptionPane.OK_CANCEL_OPTION,
                 JOptionPane.QUESTION_MESSAGE, null, Rooms, Rooms[0]);
+        Reservation_Date();
     }
 
     public void Reservation_Date() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MMMM-yyyy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         boolean validate = false;
 
         checkInDate = PromptForDate("Enter Check-in date(DD-MM-YYYY): ", formatter);
@@ -60,26 +61,10 @@ class RoomReservation extends Reservation {
             } else {
                 JOptionPane.showMessageDialog(null, "Reservation Completed");
                 validate = true;
+                Payment_Option();
             }
         }
 
-    }
-
-    // method for input check in date and check out date
-    private LocalDate PromptForDate(String Message, DateTimeFormatter formatter) {
-        LocalDate date = null;
-        boolean validinput = false;
-
-        while (!validinput) {
-            String inputdate = JOptionPane.showInputDialog(null, Message);
-            try {
-                date = LocalDate.parse(inputdate, formatter);
-                validinput = true;
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, "Invalid date. Please do DD-MM-YYYY");
-            }
-        }
-        return date;
     }
 
     public void Payment_Option() {
@@ -99,12 +84,40 @@ class RoomReservation extends Reservation {
                 break;
             case 2:
                 JOptionPane.showMessageDialog(null, "Payment canceled.");
-
                 break;
             default:
                 JOptionPane.showMessageDialog(null, "Invalid option. Please try again.");
                 Payment_Option();
         }
+    }
+
+    private void Invoice() {
+        JOptionPane.showMessageDialog(null, "Your Reservation Successfull", "Information",
+                JOptionPane.INFORMATION_MESSAGE);
+        // Printing invoice details to console
+        System.out.println("Customer Name : " + Nama);
+        System.out.println("No Room : " + Rooms[user_roomchoice]);
+        System.out.println("Days Staying : " + dayStaying);
+        System.out.println("\nCheck-in date : " + checkInDate + "\t Check-out date : " + checkOutDate);
+        System.out.println("Total Amount : Rp." + String.valueOf(totalPrice) + "\n");
+
+    }
+
+    // method for input check in date and check out date
+    private LocalDate PromptForDate(String Message, DateTimeFormatter formatter) {
+        LocalDate date = null;
+        boolean validinput = false;
+
+        while (!validinput) {
+            String inputdate = JOptionPane.showInputDialog(null, Message);
+            try {
+                date = LocalDate.parse(inputdate, formatter);
+                validinput = true;
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Invalid date. Please do DD-MM-YYYY");
+            }
+        }
+        return date;
     }
 
     private void cashPayment(double totalAmount) {
@@ -133,18 +146,6 @@ class RoomReservation extends Reservation {
             }
             break;
         }
-
-    }
-
-    public void Invoice() {
-        JOptionPane.showMessageDialog(null, "Your Reservation Successfull", "Information",
-                JOptionPane.INFORMATION_MESSAGE);
-        // Printing invoice details to console
-        System.out.println("Customer Name : " + Nama);
-        System.out.println("No Room : " + Rooms[user_roomchoice]);
-        System.out.println("Days Staying : " + dayStaying);
-        System.out.println("\nCheck-in date : " + checkInDate + "\t Check-out date : " + checkOutDate);
-        System.out.println("Total Amount : Rp." + String.valueOf(totalPrice) + "\n");
 
     }
 }

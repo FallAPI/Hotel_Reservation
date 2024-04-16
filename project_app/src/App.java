@@ -7,30 +7,34 @@ public class App {
         RoomReservation reservation = new RoomReservation();
 
         JOptionPane.showMessageDialog(null, "Welcome To TOUHO Hotel", "Information", JOptionPane.INFORMATION_MESSAGE);
+        // loop until choise is register, login or exit
+        while (true) {
+            String choice = JOptionPane.showInputDialog(null, " 1. Register \n 2. Login \n 3. exit","Choose what you want to do", JOptionPane.QUESTION_MESSAGE);
 
-        String choice = JOptionPane.showInputDialog(null, " 1. Register \n 2. Login \n 3. exit",
-                "Choose what you want to do", JOptionPane.QUESTION_MESSAGE);
-
-        switch (choice) {
-            case "1":
-                account.Register();
-                reservation.Identitas();
-                reservation.ChooseRooms();
-                reservation.Reservation_Date();
-                reservation.Payment_Option();
-                break;
-            case "2":
-                account.Login();
-                break;
-            case "3":
-                JOptionPane.showMessageDialog(null, "Thanks For Coming", "Information",
-                        JOptionPane.INFORMATION_MESSAGE);
-                System.exit(0);
-                break;
-            default:
-                JOptionPane.showMessageDialog(null, "Invalid choice", "Error", JOptionPane.ERROR_MESSAGE);
-
+            switch (choice) {
+                case "1":
+                    account.Register();
+                    break;
+                case "2":
+                    account.Login();
+                    break;
+                case "3":
+                    JOptionPane.showMessageDialog(null, "Thanks For Coming", "Information", JOptionPane.INFORMATION_MESSAGE);
+                    System.exit(0);
+                    break;
+                default:
+                    JOptionPane.showMessageDialog(null, "Invalid choice", "Error", JOptionPane.ERROR_MESSAGE);
+                    continue;
+            }
+            break;
         }
-
+        int reservation_option = JOptionPane.showConfirmDialog(null, "Want reservation now?",null, JOptionPane.YES_NO_OPTION);
+        if (reservation_option == JOptionPane.OK_OPTION) {
+            reservation.Identitas();
+            reservation.ChooseRooms();
+        } else {
+            // if user dont want reserv
+            System.exit(0);
+        }
     }
 }

@@ -13,7 +13,7 @@ public class CreateAccount {
   public void Register() {
 
     // make input Username
-    Username = JOptionPane.showInputDialog(null, "Please enter your username", "Enter Username",
+    Username = JOptionPane.showInputDialog(null, "Please enter your username", "Register",
         JOptionPane.QUESTION_MESSAGE);
 
     // make input password
@@ -35,7 +35,8 @@ public class CreateAccount {
           JOptionPane.ERROR_MESSAGE);
       Register();
     } else {
-      JOptionPane.showMessageDialog(null, "Account Registered!", "Sucessfull", JOptionPane.INFORMATION_MESSAGE);
+      JOptionPane.showMessageDialog(null, "Account Registered! Please Login!", "Sucessfull",
+          JOptionPane.INFORMATION_MESSAGE);
       Login();
     }
   }
@@ -51,21 +52,23 @@ public class CreateAccount {
     if (userPassword == JOptionPane.OK_OPTION) {
       // store password to array
       char[] userPass = passwordField.getPassword();
-
-      // validate login
+      // Validate login credentials
       if (userLogin.equals(Username) && Arrays.equals(userPass, Password)) {
+        // Successful login
         JOptionPane.showMessageDialog(null, "Successfully logged in.");
-      } else if (userLogin.isEmpty()) {
-        JOptionPane.showMessageDialog(null, "Your username is not registered \n please register first.");
-        Register();
       } else {
-        JOptionPane.showMessageDialog(null, "Invalid username or password.\nTry again.");
-        Login();
+        // If both username and password are incorrect, or if either one is incorrect
+        if (!userLogin.equals(Username)) {
+          JOptionPane.showMessageDialog(null, "Username is not registered \n Please register first", "Error", JOptionPane.ERROR_MESSAGE);
+          Register();
+        } else {
+          JOptionPane.showMessageDialog(null, "Username or password is incorrect, please try again!", "Error", JOptionPane.ERROR_MESSAGE);
+          Login();
+        }
       }
+      // if they click 'No'
     } else {
-      // end task if user click no
-      JOptionPane.showMessageDialog(null, "Thanks for come in");
-
+      JOptionPane.showMessageDialog(null, "Thanks for coming.");
     }
 
   }
