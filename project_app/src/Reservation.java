@@ -40,7 +40,7 @@ class RoomReservation extends Reservation {
         Reservation_Date();
     }
 
-    public void Reservation_Date() {
+    private void Reservation_Date() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         boolean validate = false;
 
@@ -67,7 +67,7 @@ class RoomReservation extends Reservation {
 
     }
 
-    public void Payment_Option() {
+    private void Payment_Option() {
         totalPrice = pricePerNight * dayStaying;
         String[] options = { "Tunai", "Credit Card", "Cancel" };
         int choice = JOptionPane.showOptionDialog(null, "Choose payment method:", "Payment Options",
