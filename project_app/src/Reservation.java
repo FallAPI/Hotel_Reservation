@@ -59,7 +59,6 @@ class RoomReservation extends Reservation {
                 JOptionPane.showMessageDialog(null, "Check out date must be greater than check in date");
                 Reservation_Date();
             } else {
-                JOptionPane.showMessageDialog(null, "Reservation Completed");
                 validate = true;
                 Payment_Option();
             }
@@ -69,13 +68,13 @@ class RoomReservation extends Reservation {
 
     private void Payment_Option() {
         totalPrice = pricePerNight * dayStaying;
-        String[] options = { "Tunai", "Credit Card", "Cancel" };
+        String[] options = { "Dana", "Credit Card", "Cancel" };
         int choice = JOptionPane.showOptionDialog(null, "Choose payment method:", "Payment Options",
                 JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
 
         switch (choice) {
             case 0:
-                cashPayment(totalPrice);
+                DanaPayment(totalPrice);
                 Invoice();
                 break;
             case 1:
@@ -92,15 +91,23 @@ class RoomReservation extends Reservation {
     }
 
     private void Invoice() {
-        JOptionPane.showMessageDialog(null, "Your Reservation Successfull", "Information",
-                JOptionPane.INFORMATION_MESSAGE);
-        // Printing invoice details to console
-        System.out.println("Customer Name : " + Nama);
-        System.out.println("No Room : " + Rooms[user_roomchoice]);
-        System.out.println("Days Staying : " + dayStaying);
-        System.out.println("\nCheck-in date : " + checkInDate + "\t Check-out date : " + checkOutDate);
-        System.out.println("Total Amount : Rp." + String.valueOf(totalPrice) + "\n");
+      String InvoiceMessage =  
+        "======================\n" +
+        "|   Reservation Invoice |\n" +
+        "======================\n" +
+        "Customer Name: " + Nama + "\n" +
+        "Room Number: " + Rooms[user_roomchoice] + "\n" +
+        "Days Staying: " + dayStaying + "\n" +
+        "Check-in date: " + checkInDate + "\n" +
+        "Check-out date: " + checkOutDate + "\n" +
+        "Total Amount: Rp." + totalPrice + "\n" +
+        "======================";
 
+        // print invoice
+        JOptionPane.showMessageDialog(null, InvoiceMessage, "Invoice", JOptionPane.INFORMATION_MESSAGE);
+
+        // the app is done
+        JOptionPane.showMessageDialog(null, "Your Reservation Successfull", "Information",JOptionPane.INFORMATION_MESSAGE);
     }
 
     // method for input check in date and check out date
@@ -120,16 +127,15 @@ class RoomReservation extends Reservation {
         return date;
     }
 
-    private void cashPayment(double totalAmount) {
-        double amountPaid = Double.parseDouble(JOptionPane.showInputDialog(null, "You must paid  : Rp." + totalAmount));
+    private void DanaPayment(double totalAmount) {
+        double amountPaid = Double.parseDouble(JOptionPane.showInputDialog(null, "You must paid  : Rp." + totalAmount, "Dana", JOptionPane.INFORMATION_MESSAGE));
 
-        if (amountPaid >= totalAmount) {
-            double change = amountPaid - totalAmount;
+        if (amountPaid == totalAmount) {
             JOptionPane.showMessageDialog(null,
-                    "Payment successful. Your change is: Rp." + String.format("%.2f", change));
+                    "Payment successful!.");
         } else {
             JOptionPane.showMessageDialog(null, "Insufficient payment. Please pay the full amount.");
-            cashPayment(totalAmount);
+            DanaPayment(totalAmount);
         }
     }
 

@@ -9,8 +9,7 @@ public class App {
         JOptionPane.showMessageDialog(null, "Welcome To TOUHO Hotel", "Information", JOptionPane.INFORMATION_MESSAGE);
         // loop until choise is register, login or exit
         while (true) {
-            String choice = JOptionPane.showInputDialog(null, " 1. Register \n 2. Login \n 3. exit",
-                    "Choose what you want to do", JOptionPane.QUESTION_MESSAGE);
+            String choice = JOptionPane.showInputDialog(null, " 1. Register \n 2. Login \n 3. exit","Choose what you want to do", JOptionPane.QUESTION_MESSAGE);
 
             switch (choice) {
                 case "1":
