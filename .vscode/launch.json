@@ -4,25 +4,27 @@
   // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
   "version": "0.2.0",
   "configurations": [
-    {
-      "type": "java",
-      "name": "App",
-      "request": "launch",
-      "mainClass": "App",
-      "projectName": "project_c707451f"
-    },
-    {
-      "type": "java",
-      "name": "Current File",
-      "request": "launch",
-      "mainClass": "${file}"
-    },
-    {
-      "type": "java",
-      "name": "App",
-      "request": "launch",
-      "mainClass": "App",
-      "projectName": "project_app"
+        {
+          "type": "java",
+          "name": "Debug (App)",
+          "request": "launch",
+          "mainClass": "App",
+          "projectName": "project_c707451f"
+        },
+        {
+          "type": "java",
+          "name": "Debug (Current File)",
+          "request": "launch",
+          "mainClass": "${file}"
+        },
+        {
+          "type": "java",
+          "name": "Run (App)",
+          "request": "launch",
+          "mainClass": "App",
+          "projectName": "project_c707451f"
+        }
+      ]
     }
-  ]
-}
+    
+  

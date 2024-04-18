@@ -103,6 +103,8 @@ class RoomReservation extends Reservation {
         "Total Amount: Rp." + totalPrice + "\n" +
         "======================";
 
+        
+
         // print invoice
         JOptionPane.showMessageDialog(null, InvoiceMessage, "Invoice", JOptionPane.INFORMATION_MESSAGE);
 

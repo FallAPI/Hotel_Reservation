@@ -3,7 +3,7 @@ import javax.swing.JOptionPane;
 public class App {
     public static void main(String[] args) {
 
-        CreateAccount account = new CreateAccount();
+        CreateAccount account = new Register();
         RoomReservation reservation = new RoomReservation();
 
         JOptionPane.showMessageDialog(null, "Welcome To TOUHO Hotel", "Information", JOptionPane.INFORMATION_MESSAGE);
@@ -13,7 +13,7 @@ public class App {
 
             switch (choice) {
                 case "1":
-                    account.Register();
+                    account.ManageAccount();
                     break;
                 case "2":
                     account.Login();

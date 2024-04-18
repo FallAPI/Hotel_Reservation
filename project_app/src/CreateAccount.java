@@ -3,15 +3,19 @@ import java.util.Arrays;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 
-public class CreateAccount {
+interface CreateAccount {
+  void ManageAccount();
+  void Login();
+}
+
+class Register implements CreateAccount {
   // declare private variable
   private String Username;
   private char[] Password; // encapsulation
   private JPasswordField passwordField = new JPasswordField();
 
-  // Make the method
-  public void Register() {
-
+  @Override
+  public void ManageAccount() {
     // make input Username
     Username = JOptionPane.showInputDialog(null, "Please enter your username", "Register",
         JOptionPane.QUESTION_MESSAGE);
@@ -33,7 +37,7 @@ public class CreateAccount {
     if ((Username == null || Username.length() < 1) && (Password == null || Password.length < 1)) {
       JOptionPane.showMessageDialog(null, "Fields cannot be empty! Please try again.", "Error",
           JOptionPane.ERROR_MESSAGE);
-      Register();
+      ManageAccount();
     } else {
       JOptionPane.showMessageDialog(null, "Account Registered! Please Login!", "Sucessfull",
           JOptionPane.INFORMATION_MESSAGE);
@@ -41,8 +45,12 @@ public class CreateAccount {
     }
   }
 
+  @Override
   public void Login() {
-    String userLogin = JOptionPane.showInputDialog(null, "Input Username: ", "Login", JOptionPane.QUESTION_MESSAGE);
+    final String loginUsername;
+    final char[] loginPassword;
+
+    loginUsername = JOptionPane.showInputDialog(null, "Input Username: ", "Login", JOptionPane.QUESTION_MESSAGE);
 
     passwordField.setText("");
 
@@ -51,18 +59,20 @@ public class CreateAccount {
 
     if (userPassword == JOptionPane.OK_OPTION) {
       // store password to array
-      char[] userPass = passwordField.getPassword();
+      loginPassword = passwordField.getPassword();
       // Validate login credentials
-      if (userLogin.equals(Username) && Arrays.equals(userPass, Password)) {
+      if (loginUsername.equals(Username) && Arrays.equals(loginPassword, Password)) {
         // Successful login
         JOptionPane.showMessageDialog(null, "Successfully logged in.");
       } else {
         // If both username and password are incorrect, or if either one is incorrect
-        if (!userLogin.equals(Username)) {
-          JOptionPane.showMessageDialog(null, "Username is not registered \n Please register first", "Error", JOptionPane.ERROR_MESSAGE);
-          Register();
+        if (!loginUsername.equals(Username)) {
+          JOptionPane.showMessageDialog(null, "Username is not registered \n Please register first", "Error",
+              JOptionPane.ERROR_MESSAGE);
+          ManageAccount();
         } else {
-          JOptionPane.showMessageDialog(null, "Username or password is incorrect, please try again!", "Error", JOptionPane.ERROR_MESSAGE);
+          JOptionPane.showMessageDialog(null, "Username or password is incorrect, please try again!", "Error",
+              JOptionPane.ERROR_MESSAGE);
           Login();
         }
       }
